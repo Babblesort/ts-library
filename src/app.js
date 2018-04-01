@@ -2,7 +2,7 @@ var Startup = (function () {
     function Startup() {
     }
     Startup.main = function () {
-        console.log('hello newman');
+        console.log('hello');
         return 0;
     };
     return Startup;

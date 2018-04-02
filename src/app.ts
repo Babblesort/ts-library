@@ -1,9 +1,9 @@
 function GetAllBooks() {
   let books = [
-    { title: 'Ulysses', author: 'James Joyce', available: true, category: Category.Fiction },
-    { title: 'A Farewell To Arms', author: 'Ernest Hemingway', available: false, category: Category.Fiction },
-    { title: 'Crying of Lot 49', author: 'Thomas Pynchon', available: true, category: Category.Fiction },
-    { title: 'Moby Dick', author: 'Herman Melville', available: true, category: Category.Fiction }
+    { id: 1, title: 'Ulysses', author: 'James Joyce', available: true, category: Category.Fiction },
+    { id: 2, title: 'A Farewell To Arms', author: 'Ernest Hemingway', available: false, category: Category.Fiction },
+    { id: 3, title: 'Crying of Lot 49', author: 'Thomas Pynchon', available: true, category: Category.Fiction },
+    { id: 4, title: 'Moby Dick', author: 'Herman Melville', available: true, category: Category.Whale }
   ];
 
   return books;
@@ -25,20 +25,22 @@ function LogFirstAvailable(books): void {
 }
 
 function GetBookTitlesByCategory(categoryFilter: Category): Array<string> {
-  console.log(`Getting books in category: ${categoryFilter}`);
+  console.log(`Getting books in category: ${Category[categoryFilter]}`);
 
   return GetAllBooks()
     .filter(book => book.category == categoryFilter)
     .map(book => book.title);
+}
 
+function GetBookById(id: number) {
+  return GetAllBooks().filter(book => book.id === id);
 }
 
 function LogBookTitles(titles: Array<string>): void {
-  titles.forEach(title => console.log(title));
+  titles.forEach((title, i) => console.log(`${++i} - ${title}`));
 }
 
-enum Category { Biography, Poetry, Fiction, History, Children }
+enum Category { Biography, Poetry, Fiction, History, Whale }
 
-const allBooks = GetAllBooks();
-
-LogFirstAvailable(allBooks);
+const fictionBooks = GetBookTitlesByCategory(Category.Fiction);
+LogBookTitles(fictionBooks);

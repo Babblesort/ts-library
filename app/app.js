@@ -1,9 +1,9 @@
 function GetAllBooks() {
     var books = [
-        { title: 'Ulysses', author: 'James Joyce', available: true, category: Category.Fiction },
-        { title: 'A Farewell To Arms', author: 'Ernest Hemingway', available: false, category: Category.Fiction },
-        { title: 'Crying of Lot 49', author: 'Thomas Pynchon', available: true, category: Category.Fiction },
-        { title: 'Moby Dick', author: 'Herman Melville', available: true, category: Category.Fiction }
+        { id: 1, title: 'Ulysses', author: 'James Joyce', available: true, category: Category.Fiction },
+        { id: 2, title: 'A Farewell To Arms', author: 'Ernest Hemingway', available: false, category: Category.Fiction },
+        { id: 3, title: 'Crying of Lot 49', author: 'Thomas Pynchon', available: true, category: Category.Fiction },
+        { id: 4, title: 'Moby Dick', author: 'Herman Melville', available: true, category: Category.Whale }
     ];
     return books;
 }
@@ -21,13 +21,16 @@ function LogFirstAvailable(books) {
     console.log("First Available: " + firstAvailable);
 }
 function GetBookTitlesByCategory(categoryFilter) {
-    console.log("Getting books in category: " + categoryFilter);
+    console.log("Getting books in category: " + Category[categoryFilter]);
     return GetAllBooks()
         .filter(function (book) { return book.category == categoryFilter; })
         .map(function (book) { return book.title; });
 }
+function GetBookById(id) {
+    return GetAllBooks().filter(function (book) { return book.id === id; });
+}
 function LogBookTitles(titles) {
-    titles.forEach(function (title) { return console.log(title); });
+    titles.forEach(function (title, i) { return console.log(++i + " - " + title); });
 }
 var Category;
 (function (Category) {
@@ -35,8 +38,8 @@ var Category;
     Category[Category["Poetry"] = 1] = "Poetry";
     Category[Category["Fiction"] = 2] = "Fiction";
     Category[Category["History"] = 3] = "History";
-    Category[Category["Children"] = 4] = "Children";
+    Category[Category["Whale"] = 4] = "Whale";
 })(Category || (Category = {}));
-var allBooks = GetAllBooks();
-LogFirstAvailable(allBooks);
+var fictionBooks = GetBookTitlesByCategory(Category.Fiction);
+LogBookTitles(fictionBooks);
 //# sourceMappingURL=app.js.map

@@ -4,6 +4,7 @@
         "module": "commonjs",
         "noImplicitAny": true,
         "removeComments": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "outDir": "app"
     }
 }
